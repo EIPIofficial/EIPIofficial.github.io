@@ -1,53 +1,65 @@
-/* 重置一些默认的样式 */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
- 
-body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    color: #333;
-    line-height: 1.6;
-}
- 
-header {
-    background-color: #333;
-    color: #fff;
-    padding: 10px 0;
-    text-align: center;
-}
- 
-nav ul {
-    list-style: none;
-    padding: 0;
-}
- 
-nav ul li {
-    display: inline;
-    margin: 0 15px;
-}
- 
-nav ul li a {
-    color: #fff;
-    text-decoration: none;
-}
- 
-section {
-    padding: 20px;
-    margin: 20px;
-    background-color: #fff;
-    border-radius: 8px;
-}
- 
-h2 {
-    color: #333;
-}
- 
-footer {
-    text-align: center;
-    padding: 10px 0;
-    background-color: #333;
-    color: #fff;
+/* style.css — only applied in graphical browsers */
+@media screen {
+    body {
+        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, monospace;
+        max-width: 75ch;
+        margin: 2rem auto;
+        padding: 0 1.5rem;
+        line-height: 1.7;
+        color: #1f2937;
+        background: #ffffff;
+    }
+    h1 {
+        text-align: center;
+        color: #1e40af;
+        font-size: 1.8rem;
+        margin-bottom: 0.5rem;
+    }
+    h2 {
+        color: #1d4ed8;
+        border-bottom: 2px solid #e5e7eb;
+        padding-bottom: 0.3rem;
+        margin-top: 2rem;
+    }
+    h3 { color: #3730a3; margin-top: 1.5rem; }
+    a {
+        color: #2563eb;
+        text-decoration: none;
+        border-bottom: 1px dotted transparent;
+        transition: border-color 0.2s;
+    }
+    a:hover, a:focus {
+        border-bottom-color: #2563eb;
+        text-decoration: none;
+    }
+    hr {
+        border: none;
+        border-top: 1px dashed #9ca3af;
+        margin: 2rem 0;
+    }
+    details {
+        background: #f9fafb;
+        padding: 0.75rem 1rem;
+        border-radius: 6px;
+        margin: 0.5rem 0;
+    }
+    summary {
+        font-weight: 600;
+        cursor: pointer;
+        color: #1e40af;
+    }
+    footer {
+        text-align: center;
+        color: #6b7280;
+        font-size: 0.9rem;
+        margin-top: 2.5rem;
+        padding-top: 1rem;
+        border-top: 1px solid #e5e7eb;
+    }
+    code {
+        background: #f3f4f6;
+        padding: 0.15rem 0.3rem;
+        border-radius: 3px;
+        font-family: 'Fira Code', monospace;
+    }
 }
