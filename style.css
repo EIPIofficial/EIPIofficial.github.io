@@ -1,65 +1,216 @@
-/* style.css — only applied in graphical browsers */
-@media screen {
-    body {
-        font-family: system-ui, -apple-system, 'Segoe UI', Roboto, monospace;
-        max-width: 75ch;
-        margin: 2rem auto;
-        padding: 0 1.5rem;
-        line-height: 1.7;
-        color: #1f2937;
-        background: #ffffff;
+:root {
+    color-scheme: light;
+    --background: #fafaf8;
+    --text: #1f2933;
+    --muted: #667085;
+    --border: #d9dde3;
+    --link: #1d4ed8;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    background: var(--background);
+    color: var(--text);
+    font: 16px/1.7 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.page {
+    max-width: 44rem;
+    margin: 0 auto;
+    padding: 4rem 1.5rem;
+}
+
+header {
+    margin-bottom: 3rem;
+}
+
+main {
+    display: grid;
+    gap: 2.5rem;
+}
+
+section {
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+
+h1,
+h2,
+h3,
+p,
+ul {
+    margin: 0;
+}
+
+h1 {
+    font-size: clamp(2rem, 4vw, 2.6rem);
+    line-height: 1.15;
+}
+
+h2 {
+    font-size: 1.1rem;
+    margin-bottom: 0.75rem;
+}
+
+h3 {
+    font-size: 1rem;
+    margin-bottom: 0.35rem;
+}
+
+p + p,
+ul + p,
+p + ul,
+ul + ul {
+    margin-top: 0.9rem;
+}
+
+ul {
+    padding-left: 1.2rem;
+}
+
+li + li {
+    margin-top: 0.5rem;
+}
+
+a {
+    color: var(--link);
+    text-decoration: none;
+}
+
+a:hover,
+a:focus-visible {
+    text-decoration: underline;
+}
+
+.intro {
+    color: var(--muted);
+    margin-top: 0.75rem;
+    max-width: 38rem;
+}
+
+.nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1.25rem;
+}
+
+.nav a {
+    color: var(--text);
+}
+
+.page-title a {
+    color: inherit;
+}
+
+.page-title a:hover,
+.page-title a:focus-visible {
+    text-decoration: underline;
+}
+
+.project-list,
+.simple-list {
+    list-style: none;
+    padding: 0;
+}
+
+.project-list li,
+.simple-list li {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border);
+}
+
+.project-list li:last-child,
+.simple-list li:last-child {
+    border-bottom: 0;
+}
+
+.journal-picker {
+    display: none;
+}
+
+.js-enabled .journal-picker {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
+.picker-field {
+    display: grid;
+    gap: 0.45rem;
+}
+
+.picker-field span {
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.picker-field select {
+    width: 100%;
+    padding: 0.7rem 0.8rem;
+    border: 1px solid var(--border);
+    background: #fff;
+    color: var(--text);
+    font: inherit;
+}
+
+.journal-entry {
+    margin-top: 1.5rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+
+.journal-status {
+    margin-top: 1rem;
+    color: var(--muted);
+    font-size: 0.95rem;
+}
+
+.journal-body h2,
+.journal-body h3 {
+    margin-bottom: 0.6rem;
+}
+
+.journal-body p + p,
+.journal-body p + ul,
+.journal-body ul + p,
+.journal-body h2 + p,
+.journal-body h3 + p,
+.journal-body h2 + ul,
+.journal-body h3 + ul {
+    margin-top: 0.9rem;
+}
+
+.label {
+    display: block;
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: 0.2rem;
+}
+
+footer {
+    color: var(--muted);
+    font-size: 0.95rem;
+    margin-top: 3rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid var(--border);
+}
+
+code {
+    font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+    font-size: 0.95em;
+}
+
+@media (max-width: 640px) {
+    .page {
+        padding: 2.5rem 1.25rem;
     }
-    h1 {
-        text-align: center;
-        color: #1e40af;
-        font-size: 1.8rem;
-        margin-bottom: 0.5rem;
-    }
-    h2 {
-        color: #1d4ed8;
-        border-bottom: 2px solid #e5e7eb;
-        padding-bottom: 0.3rem;
-        margin-top: 2rem;
-    }
-    h3 { color: #3730a3; margin-top: 1.5rem; }
-    a {
-        color: #2563eb;
-        text-decoration: none;
-        border-bottom: 1px dotted transparent;
-        transition: border-color 0.2s;
-    }
-    a:hover, a:focus {
-        border-bottom-color: #2563eb;
-        text-decoration: none;
-    }
-    hr {
-        border: none;
-        border-top: 1px dashed #9ca3af;
-        margin: 2rem 0;
-    }
-    details {
-        background: #f9fafb;
-        padding: 0.75rem 1rem;
-        border-radius: 6px;
-        margin: 0.5rem 0;
-    }
-    summary {
-        font-weight: 600;
-        cursor: pointer;
-        color: #1e40af;
-    }
-    footer {
-        text-align: center;
-        color: #6b7280;
-        font-size: 0.9rem;
-        margin-top: 2.5rem;
-        padding-top: 1rem;
-        border-top: 1px solid #e5e7eb;
-    }
-    code {
-        background: #f3f4f6;
-        padding: 0.15rem 0.3rem;
-        border-radius: 3px;
-        font-family: 'Fira Code', monospace;
+
+    .js-enabled .journal-picker {
+        grid-template-columns: 1fr;
     }
 }

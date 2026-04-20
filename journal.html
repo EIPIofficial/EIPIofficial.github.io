@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EIPI &gt;&gt; Journal</title>
+    <meta name="description" content="Daily journal archive by EIPI.">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="page">
+        <header>
+            <h1 class="page-title"><a href="index.html">EIPI</a> &gt;&gt; Journal</h1>
+        </header>
+
+        <main>
+            <section class="journal-browser">
+                <div id="journal-app"></div>
+            </section>
+        </main>
+    </div>
+    <noscript>
+        <div class="page">
+            <main>
+                <p>Open a journal file directly, for example <a href="journals/2026/4/20.md">journals/2026/4/20.md</a>.</p>
+            </main>
+        </div>
+    </noscript>
+    <script>
+        document.documentElement.classList.add("js-enabled");
+
+        const journalApp = document.getElementById("journal-app");
+        const years = ["2023", "2024", "2025", "2026"];
+        const months = Array.from({ length: 12 }, (_, index) => String(index + 1));
+
+        journalApp.innerHTML = `
+            <form class="journal-picker" id="journal-picker">
+                <label class="picker-field" for="journal-year">
+                    <span>Year</span>
+                    <select id="journal-year" name="year"></select>
+                </label>
+                <label class="picker-field" for="journal-month">
+                    <span>Month</span>
+                    <select id="journal-month" name="month"></select>
+                </label>
+                <label class="picker-field" for="journal-day">
+                    <span>Day</span>
+                    <select id="journal-day" name="day"></select>
+                </label>
+            </form>
+            <p class="journal-status" id="journal-status"></p>
+            <article class="journal-entry" id="journal-entry">
+                <div class="journal-body" id="entry-body"></div>
+            </article>
+        `;
+
+        const yearSelect = document.getElementById("journal-year");
+        const monthSelect = document.getElementById("journal-month");
+        const daySelect = document.getElementById("journal-day");
+        const journalStatus = document.getElementById("journal-status");
+        const entryBody = document.getElementById("entry-body");
+
+        function setOptions(select, values, preferredValue) {
+            select.innerHTML = "";
+
+            values.forEach((value) => {
+                const option = document.createElement("option");
+                option.value = value;
+                option.textContent = value;
+                select.appendChild(option);
+            });
+
+            if (preferredValue && values.includes(preferredValue)) {
+                select.value = preferredValue;
+            }
+        }
+
+        function daysInMonth(year, month) {
+            return new Date(Number(year), Number(month), 0).getDate();
+        }
+
+        function escapeHtml(value) {
+            return value
+                .replaceAll("&", "&amp;")
+                .replaceAll("<", "&lt;")
+                .replaceAll(">", "&gt;");
+        }
+
+        function renderInline(value) {
+            return escapeHtml(value).replace(/`([^`]+)`/g, "<code>$1</code>");
+        }
+
+        function renderMarkdown(markdown) {
+            const lines = markdown.replace(/\r\n/g, "\n").split("\n");
+            const fragments = [];
+            let paragraph = [];
+            let listItems = [];
+
+            function flushParagraph() {
+                if (!paragraph.length) {
+                    return;
+                }
+
+                fragments.push(`<p>${renderInline(paragraph.join(" "))}</p>`);
+                paragraph = [];
+            }
+
+            function flushList() {
+                if (!listItems.length) {
+                    return;
+                }
+
+                fragments.push(`<ul>${listItems.map((item) => `<li>${renderInline(item)}</li>`).join("")}</ul>`);
+                listItems = [];
+            }
+
+            lines.forEach((line) => {
+                const trimmed = line.trim();
+
+                if (!trimmed) {
+                    flushParagraph();
+                    flushList();
+                    return;
+                }
+
+                if (trimmed.startsWith("# ")) {
+                    flushParagraph();
+                    flushList();
+                    fragments.push(`<h2>${renderInline(trimmed.slice(2))}</h2>`);
+                    return;
+                }
+
+                if (trimmed.startsWith("## ")) {
+                    flushParagraph();
+                    flushList();
+                    fragments.push(`<h3>${renderInline(trimmed.slice(3))}</h3>`);
+                    return;
+                }
+
+                if (trimmed.startsWith("- ")) {
+                    flushParagraph();
+                    listItems.push(trimmed.slice(2));
+                    return;
+                }
+
+                flushList();
+                paragraph.push(trimmed);
+            });
+
+            flushParagraph();
+            flushList();
+
+            return fragments.join("");
+        }
+
+        async function renderEntry() {
+            const year = yearSelect.value;
+            const month = monthSelect.value;
+            const day = daySelect.value;
+            const path = `journals/${year}/${month}/${day}.md`;
+
+            journalStatus.textContent = `File: ${path}`;
+
+            try {
+                const response = await fetch(path, { cache: "no-store" });
+                if (!response.ok) {
+                    throw new Error("missing");
+                }
+
+                const markdown = await response.text();
+                entryBody.innerHTML = renderMarkdown(markdown);
+            } catch {
+                entryBody.innerHTML = "<p>Journal: No entry for this date.</p>";
+            }
+
+            window.location.hash = `${year}-${month}-${day}`;
+        }
+
+        function updateDays() {
+            const year = yearSelect.value;
+            const month = monthSelect.value;
+            const previousDay = daySelect.value;
+            const days = Array.from(
+                { length: daysInMonth(year, month) },
+                (_, index) => String(index + 1)
+            );
+
+            setOptions(daySelect, days, previousDay);
+            renderEntry();
+        }
+
+        function updateMonths() {
+            const previousMonth = monthSelect.value;
+
+            setOptions(monthSelect, months, previousMonth);
+            updateDays();
+        }
+
+        function applyHashSelection() {
+            const match = window.location.hash.match(/^#(\d{4})-(\d{1,2})-(\d{1,2})$/);
+            if (!match) {
+                return false;
+            }
+
+            const [, year, month, day] = match;
+            if (!years.includes(year)) {
+                return false;
+            }
+
+            yearSelect.value = year;
+            updateMonths();
+
+            if (months.includes(month)) {
+                monthSelect.value = month;
+                updateDays();
+            }
+
+            if ([...daySelect.options].some((option) => option.value === day)) {
+                daySelect.value = day;
+            }
+
+            renderEntry();
+            return true;
+        }
+
+        setOptions(yearSelect, years, "2026");
+        updateMonths();
+        if (!applyHashSelection()) {
+            monthSelect.value = "4";
+            updateDays();
+            daySelect.value = "20";
+            renderEntry();
+        }
+
+        yearSelect.addEventListener("change", updateMonths);
+        monthSelect.addEventListener("change", updateDays);
+        daySelect.addEventListener("change", renderEntry);
+    </script>
+</body>
+</html>

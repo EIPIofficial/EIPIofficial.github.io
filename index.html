@@ -3,176 +3,64 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>EIPI • Math, Projects & Notes</title>
-    <meta name="description" content="EIPI's personal homepage: mathematics notes, Simext, Ctxfmt, and research projects">
-    <!-- Progressive CSS: ignored by terminal browsers -->
-    <link rel="stylesheet" href="style.css" media="screen">
-    <style>
-        /* Minimal inline CSS for basic terminal-friendly spacing (optional fallback) */
-        body { line-height: 1.5; }
-        section { margin: 1.5em 0; }
-        h2 { margin-top: 1.5em; }
-        ul { padding-left: 1.5em; }
-        a { text-decoration: none; }
-    </style>
+    <title>EIPI</title>
+    <meta name="description" content="Personal website of EIPI, a mathematics student.">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="page">
+        <header>
+            <h1>EIPI</h1>
+            <p class="intro">
+                Mathematics freshman interested in algebra, number theory, and computation.
+            </p>
+        </header>
 
-<!-- ASCII-style header for terminal clarity -->
-<header>
-    <h1>★ EIPI's Personal Homepage ★</h1>
-    <p><em>Mathematics freshman • Terminal-friendly design</em></p>
-    <nav aria-label="Main navigation">
-        <ul>
-            <li><a href="#about">▸ About</a></li>
-            <li><a href="#context">▸ Context Projects</a></li>
-            <li><a href="#math-physics">▸ Math & Physics</a></li>
-            <li><a href="#contact">▸ Contact</a></li>
-        </ul>
-    </nav>
-</header>
+        <main>
+            <section aria-labelledby="about">
+                <h2 id="about">About</h2>
+                <p>
+                    This site is a small index of my work, notes, and projects.
+                </p>
+            </section>
 
-<hr>
+            <section aria-labelledby="pages">
+                <h2 id="pages">Pages</h2>
+                <ul class="project-list">
+                    <li>
+                        <h3><a href="projects.html">Projects</a></h3>
+                    </li>
+                    <li>
+                        <h3><a href="math-physics.html">Math &amp; physics</a></h3>
+                    </li>
+                    <li>
+                        <h3><a href="journal.html">Journal</a></h3>
+                    </li>
+                </ul>
+            </section>
 
-<main>
-    <!-- ========== ABOUT SECTION ========== -->
-    <section id="about" aria-labelledby="about-heading">
-        <h2 id="about-heading">▸ About Me</h2>
-        <p>I'm <strong>EIPI</strong>, a freshman majoring in <strong>mathematics</strong>.</p>
-        <p>Passionate about logic, patterns, abstract algebra, number theory, and the intersection of computation and mathematical reasoning.</p>
-    </section>
+            <section aria-labelledby="contact">
+                <h2 id="contact">Contact</h2>
+                <ul class="simple-list">
+                    <li>
+                        <span class="label">Email</span>
+                        <a href="mailto:EIPI_official@outlook.com">EIPI_official@outlook.com</a>
+                    </li>
+                    <li>
+                        <span class="label">GitHub</span>
+                        <a href="https://github.com/EIPIofficial/">github.com/EIPIofficial</a>
+                    </li>
+                    <li>
+                        <span class="label">Phone</span>
+                        <a href="tel:+85254495780">+852 5449 5780</a>
+                    </li>
+                </ul>
+            </section>
+        </main>
 
-    <hr>
-
-    <!-- ========== CONTEXT PROJECTS SECTION ========== -->
-    <section id="context" aria-labelledby="context-heading">
-        <h2 id="context-heading">▸ Context Projects</h2>
-
-        <!-- Simext -->
-        <h3 id="simext-heading">Simext</h3>
-        <p>A LaTeX environment system for ConTeXt. Latest version:</p>
-        <ul>
-            <li><strong>V1.2.3</strong>: <a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.2.3.tex">env_V1.2.3.tex</a></li>
-        </ul>
-
-        <p><strong>Previous versions</strong> (expandable in browsers, visible in terminals):</p>
-        <!-- details/summary has basic terminal support; content remains accessible if ignored -->
-        <details>
-            <summary>View all Simext versions</summary>
-            <ul>
-                <li><a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.2.2.tex">V1.2.2</a></li>
-                <li><a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.2.1.tex">V1.2.1</a></li>
-                <li><a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.2.0.tex">V1.2.0</a></li>
-                <li><a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.1.4.tex">V1.1.4</a></li>
-                <li><a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.1.3.tex">V1.1.3</a></li>
-                <li><a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.1.2.tex">V1.1.2</a></li>
-                <li><a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.1.1.tex">V1.1.1</a></li>
-                <li><a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.1.0.tex">V1.1.0</a></li>
-                <li><a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.0.2.tex">V1.0.2</a></li>
-                <li><a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.0.1.tex">V1.0.1</a></li>
-                <li><a href="https://github.com/EIPIofficial/Simext/blob/main/env_V1.0.0.tex">V1.0.0</a></li>
-            </ul>
-        </details>
-
-        <hr>
-
-        <!-- Ctxfmt -->
-        <h3 id="ctxfmt-heading">Ctxfmt</h3>
-        <p>A program for formatting LaTeX as ConTeXt, powered by DeepSeek and compatible with <a href="https://github.com/EIPIofficial/Simext">Simext</a>.</p>
-        <p><strong>Download</strong>: <a href="https://github.com/EIPIofficial/Ctxfmt">github.com/EIPIofficial/Ctxfmt</a></p>
-
-        <h4>Usage</h4>
-        <ol>
-            <li>Submit a PDF to DeepSeek with DeepThink (R1) to convert it into LaTeX.</li>
-            <li>Create a <code>.tex</code> document and paste the output.</li>
-            <li>Run <code>ctxfmt.lua</code> using Lua: <code>ctxfmt.lua input.tex output.tex</code></li>
-            <li>Add <code>\environment[...]</code> to <code>output.tex</code> and compile with ConTeXt.</li>
-            <li><em>Note</em>: The <code>fig.lua</code> module is not yet complete — add figures manually for now.</li>
-        </ol>
-    </section>
-
-    <hr>
-
-    <!-- ========== MATH & PHYSICS SECTION ========== -->
-    <section id="math-physics" aria-labelledby="math-physics-heading">
-        <h2 id="math-physics-heading">▸ Math & Physics</h2>
-
-        <!-- Notes -->
-        <h3 id="notes-heading">Notes</h3>
-        <ul>
-            <li><a href="#algebra-number">Algebra and Number Theory</a></li>
-            <li><a href="#analysis-diff">Analysis and Differential Equations</a></li>
-            <li><a href="#computational">Computational and Applied Math</a></li>
-            <li><a href="#geometry-topo">Geometry and Topology</a></li>
-            <li><a href="#prob-stats">Probability and Statistics</a></li>
-            <li><a href="#mechanics">Major Mechanics</a></li>
-        </ul>
-
-        <!-- Sub-sections for anchor targets (content can be expanded later) -->
-        <details id="algebra-number">
-            <summary>Algebra and Number Theory</summary>
-            <p><em>Notes coming soon. Topics: group theory, ring theory, modular arithmetic, Diophantine equations.</em></p>
-        </details>
-
-        <details id="analysis-diff">
-            <summary>Analysis and Differential Equations</summary>
-            <p><em>Notes coming soon. Topics: real analysis, ODEs, PDEs, functional analysis.</em></p>
-        </details>
-
-        <details id="computational">
-            <summary>Computational and Applied Math</summary>
-            <p><em>Notes coming soon. Topics: numerical methods, optimization, scientific computing.</em></p>
-        </details>
-
-        <details id="geometry-topo">
-            <summary>Geometry and Topology</summary>
-            <p><em>Notes coming soon. Topics: differential geometry, algebraic topology, manifolds.</em></p>
-        </details>
-
-        <details id="prob-stats">
-            <summary>Probability and Statistics</summary>
-            <p><em>Notes coming soon. Topics: probability theory, statistical inference, stochastic processes.</em></p>
-        </details>
-
-        <details id="mechanics">
-            <summary>Major Mechanics</summary>
-            <p><em>Notes coming soon. Topics: classical mechanics, Lagrangian/Hamiltonian formalism, continuum mechanics.</em></p>
-        </details>
-
-        <hr>
-
-        <!-- Papers & Journals -->
-        <h3 id="papers-heading">Papers</h3>
-        <p><em>Research papers and preprints will be listed here.</em></p>
-
-        <h3 id="journal-heading">My Journals</h3>
-        <p><em>Personal research journals and learning logs.</em></p>
-    </section>
-
-    <hr>
-
-    <!-- ========== CONTACT SECTION ========== -->
-    <section id="contact" aria-labelledby="contact-heading">
-        <h2 id="contact-heading">▸ Contact</h2>
-        <p>Reach out via:</p>
-        <ul>
-            <li>✉️ Email: <a href="mailto:EIPI_official@outlook.com">EIPI_official@outlook.com</a></li>
-            <li>📞 Telephone: <em>Not yet available</em></li>
-            <li>💻 GitHub: <a href="https://github.com/EIPIofficial/">github.com/EIPIofficial</a></li>
-        </ul>
-    </section>
-</main>
-
-<hr>
-
-<footer>
-    <p>© 2025 EIPI • All Rights Reserved</p>
-    <p><small>Tip: View this page in terminal with <code>lynx index.html</code>, <code>w3m index.html</code>, or <code>links index.html</code></small></p>
-    <p><small>Last updated: April 2026 • Built with semantic HTML for universal access</small></p>
-</footer>
-
-<!-- Skip link for accessibility (hidden visually, useful for screen readers/terminal nav) -->
-<a href="#about" style="position:absolute;left:-9999px">Skip to content</a>
-
+        <footer>
+            <p>&copy; 2025 EIPI</p>
+        </footer>
+    </div>
 </body>
 </html>
